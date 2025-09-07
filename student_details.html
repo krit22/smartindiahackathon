@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Registration - Smart Student Hub</title>
+
+<!-- Poppins font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ----------------- Theme Colors ----------------- */
+:root {
+  --accent: #1e293b;
+  --muted: #475569;
+  --primary: #4f46e5;
+  --primary-light: #818cf8;
+  --card-bg: #fff;
+  --border-color: #e5e7eb;
+}
+
+/* ----------------- Reset ----------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: "Poppins", sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  background: linear-gradient(135deg, #c6c8d5, #94a5e1, #ffffff);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+  position: relative;
+}
+
+/* ----------------- Background animation ----------------- */
+@keyframes gradientBG {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+/* ----------------- Floating particles ----------------- */
+body::before {
+  content: '';
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  opacity: 0.03;
+  animation: moveParticles 30s linear infinite;
+}
+@keyframes moveParticles {
+  0% {background-position: 0 0;}
+  100% {background-position: 1000px 1000px;}
+}
+
+/* ----------------- Fade-up animation ----------------- */
+.fade-up { opacity: 0; transform: translateY(20px); animation: fadeUp 0.8s ease forwards;}
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0);}
+}
+
+/* ----------------- Header ----------------- */
+header {
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* ----------------- Card ----------------- */
+.login-card {
+  background: var(--card-bg);
+  padding: 40px 30px;
+  width: 450px;
+  max-height: 550px;   /* ✅ match student registration */
+  border-radius: 18px;
+  box-shadow: 0 12px 40px rgba(79,70,229,0.15);
+  text-align: center;
+  position: relative;
+  overflow: hidden; /* keeps shine effect inside */
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+}
+
+.login-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(79,70,229,0.25);
+  background: linear-gradient(135deg, #f0f4ff, #e0e7ff);
+}
+
+/* Shine effect */
+.login-card::after {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: rgba(255,255,255,0.05);
+  transform: rotate(25deg);
+  pointer-events: none;
+  transition: all 0.6s ease;
+}
+.login-card:hover::after {
+  top: -30%;
+  left: -30%;
+  background: rgba(255,255,255,0.1);
+}
+
+/* ----------------- Typography ----------------- */
+.login-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+.login-card label {
+  display: block;
+  text-align: left;
+  margin: 14px 0 6px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* ----------------- Scrollable form container ----------------- */
+.form-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px; /* for scrollbar space */
+}
+.form-container::-webkit-scrollbar {
+  width: 6px;
+}
+.form-container::-webkit-scrollbar-thumb {
+  background: var(--primary-light);
+  border-radius: 10px;
+}
+
+/* ----------------- Inputs ----------------- */
+.login-card input {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+.login-card input:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 15px rgba(79,70,229,0.2);
+  transform: scale(1.01);
+}
+
+/* ----------------- Button ----------------- */
+.login-card button {
+  margin-top: 25px;
+  width: 100%;
+  padding: 14px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.login-card button:hover {
+  background: var(--primary-light);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 8px 20px rgba(79,70,229,0.25);
+}
+
+/* ----------------- Responsive ----------------- */
+@media (max-width: 500px) {
+  .login-card { width: 90%; padding: 30px 20px; }
+  header { font-size: 24px; left: 20px; }
+}
+</style>
+</head>
+<body>
+
+<header class="fade-up">SMART STUDENT HUB</header>
+
+<div class="login-card fade-up">
+  <h2>Student Registration</h2>
+  <div class="form-container">
+    <form>
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your full name" required>
+
+      <label for="institute">Institute:</label>
+      <input type="text" id="institute" placeholder="Enter your institute name" required>
+
+      <label for="department">Department:</label>
+      <input type="text" id="department" placeholder="Enter your department" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" placeholder="Enter your email" required>
+
+      <label for="password">Set Password:</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+
+      <label for="confirm">Confirm Password:</label>
+      <input type="password" id="confirm" placeholder="Re-enter your password" required>
+
+      <button type="submit">Register</button>
+    </form>
+  </div>
+</div>
+
+<script>
+// Sequential fade-up delay
+document.querySelectorAll('.fade-up').forEach((el, index) => {
+  el.style.animationDelay = (index * 0.2) + 's';
+});
+</script>
+
+</body>
+</html>
